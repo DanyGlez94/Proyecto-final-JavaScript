@@ -103,6 +103,64 @@ var Calculadora = {
     }else{
       console.log("No se puede agregar - al número 0")
     }
+  },
+  operaciones: function(id){
+    switch (id) {
+      case "mas":
+        this.valor1 = document.getElementById('display').innerHTML;
+        this.operacion = "+";
+        display.innerHTML = ""; //Limpia la pantalla para indicar que se hará una operación
+        break;
+      case "menos":
+        this.valor1 = document.getElementById('display').innerHTML;
+        this.operacion = "-";
+        display.innerHTML = "";
+        break;
+      case "por":
+        this.valor1 = document.getElementById('display').innerHTML;
+        this.operacion = "*";
+        display.innerHTML = "";
+        break;
+      case "dividido":
+        this.valor1 = document.getElementById('display').innerHTML;
+        this.operacion = "/";
+        display.innerHTML = "";
+        break;
+      case "raiz":
+        this.valor1 = document.getElementById('display').innerHTML;
+        this.operacion = "raiz";
+        display.innerHTML = "";
+        break;
+      case "igual":
+        console.log("resultado");
+        this.valor2 = document.getElementById('display').innerHTML;
+        Calculadora.resuelve(this.operacion);
+        break;
+    }
+  },
+  resuelve: function(operacion){
+    var resultado = 0;
+    var cortarResultado;
+    switch (operacion) {
+      case "+":
+        resultado = parseFloat(this.valor1) + parseFloat(this.valor2); //parseFloat para convertir a número de nuevo, ya que antes lo había convertido a string
+        break;
+      case "-":
+        resultado = parseFloat(this.valor1) - parseFloat(this.valor2);
+        break;
+      case "*":
+        resultado = parseFloat(this.valor1) * parseFloat(this.valor2);
+        break;
+      case "/":
+        resultado = parseFloat(this.valor1) / parseFloat(this.valor2);
+        break;
+      case "raiz":
+        resultado = parseFloat(Math.sqrt(this.valor1));
+    }
+    resultado = String(resultado); //Lo convierto a string de nuevo para poder usar la funcion slice y limitar el número de dígitos a mostrar en pantalla
+    cortarResultado = resultado.slice(0, 8);
+    console.log(resultado); //Muestra el resultado completo en consola
+    display.innerHTML = cortarResultado;
   }
 }
 
